@@ -24,30 +24,32 @@
 </div>
 
 <div class='container'>
-  <ul id="people">
-    <% for person in @people %>
-      <li data-id="<%= person.id %>">
-        <div class="person">
-          <span class="dnd-node person"><%= person.name.capitalize %></span>
-        </div>
-        <ul class='allocations'>
-          <% for a in  person.allocations.where(task_id: @custom_tasks) %>
-            <li class='allocation' >
-              <span class='allocation' data-id="<%= a.id %>"><%= a.task.name[0...40] %></span>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
-</div>
+  <div id='assignments'>
+    <ul id="people">
+      <% for person in @people %>
+        <li data-id="<%= person.id %>">
+          <div class="person">
+            <span class="dnd-node person"><%= person.name.capitalize %></span>
+          </div>
+          <ul class='allocations'>
+            <% for a in  person.allocations.where(task_id: @custom_tasks) %>
+              <li class='allocation' >
+                <div class='allocation' data-id="<%= a.id %>"><%= a.task.name[0...40] %></div>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-<div class='container'>
-  <ul id="tasks">
-    <% for task in @public_tasks %>
-      <li>
-        <span class="dnd-node" draggable='true' data-id="<%= task.id %>"><%= task.name[0...40] %></span>
-      </li>
-    <% end %>
-  </ul>
+  <div id='suggested-assignments'>
+    <ul id="tasks">
+      <% for task in @public_tasks %>
+        <li>
+          <span class="dnd-node" draggable='true' data-id="<%= task.id %>"><%= task.name[0...40] %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
